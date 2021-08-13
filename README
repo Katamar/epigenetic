@@ -1,0 +1,65 @@
+System requirements
+-------------------
+In order to compile, a C++ compiler must be installed: gcc/g++ on Linux or Mac OS.
+
+Requirements:
+- gcc/g++ version 4.8 or higher
+- OS: Ubuntu 16.04 Xenial Xerus LTS or higher
+      Mac OS 10.12 Sierra or higher
+
+The software has been extensively tested on Ubuntu 18.04 and 20.04.
+
+Installation guide
+------------------
+
+Software installation (compilation) proceeds within 30 s, depending on computer configuration. Software run time depends on the parameters such, most notably number of time steps. 
+
+1. Download the zipped code on github and unpack it
+2. Using command line, enter the unzipped directory; epigenetic-main, e.g.
+
+    cd ~/Downloads/epigenetic-main
+
+3A. In the command line, type the following to compile: 
+
+    g++ epigenetic.cpp -o epigenetic
+    
+    In the command line, type the following to run the code:
+
+    ./epigenetic
+
+                --  or  --
+3B. In the command line, type the following command:
+     
+    source computer_run.sh 
+
+
+Demo
+----
+
+The code is a physical simulation and it requires the input of physical parameters, which are located in the epigenetic.cpp between lines 34 and 54. If needed, these can be changed prior to the simulation run.
+
+1. Input files: 
+   
+   1.A. coor_column.dat file contains the initial configuration of the chain which defined by the cartesian coordinates of each monomer. One such file is provided. The file contains N rows and 3 columns, where N is the number of monomers, while the columns contain x, y, and z coordinates
+
+   1.B. In order to run, the code requires all *.cpp and *.hpp and *.h files that are present in the directory.
+
+2. The code outputs the following data files:
+
+   2.A. traj.dcd : binary file containing the trajectory of the chain, i.e. the x,y,z coordinates for each outputted snapshot (controlled by parameter "factor" in the epigenetic.cpp file. factor=10 in this version). *.dcd is a standard trajectory file in molecular simulations, read by many/most visualisation softwares, e.g. VMD (Visual Molecular Dynamics).
+
+   2.B. epigenetic_identity.dat : a text file where each row represents the outputted snapshot of the epigenetic identity of each monomer, saved in columns. Frequency of outputting depends on the parameter "factor" in epigenetic.cpp and is set to factor=10. The values in the file encode the epigenetic state as following: 
+       
+      "1" : the nucleation site
+      "2" : modified (M) nucleosome
+      "3" : unmodified (U) nucleosome
+
+   2.C. n300_end_to_end.dat : a text file where each row represents the end to end distance (Euclidean distance between the first and last monomer in the chain), expressed in nanometers .
+
+3. Expected run time for a demo: 
+
+Data can be generated within 1-2 min, however, in order to achieve good sampling and production-quality data, the run time is several hours or days. The appropriate run time will depend on simulation parameters.
+
+4. Instructions for use of data:
+
+The data reporeted in the paper was extracted by analyzing the epigenetic_identity.dat as desribed in detail in the main text. The file can be opened with any text editor. If needed, analysis scripts can be provided.
